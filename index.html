@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gather - Escritório Virtual</title>
+<script src="https://res.cdn.office.net/teams-js/2.31.0/js/MicrosoftTeams.min.js"></script>
+<style>
+  html,body{height:100%;margin:0}
+  body{display:flex;align-items:center;justify-content:center;font-family:"Segoe UI",system-ui,sans-serif;background:#fff;color:#242424}
+  .card{text-align:center;max-width:420px;padding:32px}
+  h1{font-size:22px;margin:0 0 8px}
+  p{margin:0 0 24px;color:#616161;font-size:14px;line-height:1.5}
+  button{background:#4359d6;color:#fff;border:0;border-radius:6px;padding:12px 28px;font-size:15px;font-weight:600;cursor:pointer}
+  button:hover{background:#3447b5}
+  a{display:block;margin-top:16px;font-size:13px;color:#4359d6}
+</style>
+</head>
+<body>
+  <div class="card">
+    <h1>Escritório Virtual</h1>
+    <p>O Gather abre em uma janela do navegador. Clique no botão para entrar no escritório.</p>
+    <button id="open">Abrir escritório</button>
+    <a id="fallback" href="https://app.v2.gather.town/app/454f386f-04dc-4bbb-8d93-d584e03e0c88/join" target="_blank" rel="noopener">Se não abrir, clique aqui</a>
+  </div>
+<script>
+  var URL_GATHER = "https://app.v2.gather.town/app/454f386f-04dc-4bbb-8d93-d584e03e0c88/join";
+  var ready = false;
+  try {
+    microsoftTeams.app.initialize().then(function(){ ready = true; }).catch(function(){});
+  } catch (e) {}
+  document.getElementById("open").addEventListener("click", function(){
+    if (ready) {
+      microsoftTeams.app.openLink(URL_GATHER).catch(function(){ window.open(URL_GATHER, "_blank"); });
+    } else {
+      window.open(URL_GATHER, "_blank");
+    }
+  });
+</script>
+</body>
+</html>
